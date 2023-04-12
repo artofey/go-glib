@@ -227,7 +227,7 @@ func (v *Object) SetPropertyValue(name string, value *Value) error {
 	if err != nil {
 		return err
 	}
-	if valType != propType {
+	if !(valType.IsA(propType) || propType.IsA(valType)) {
 		return fmt.Errorf("Invalid type %s for property %s", value.TypeName(), name)
 	}
 	cstr := C.CString(name)
